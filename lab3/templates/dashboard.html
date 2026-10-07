@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef3ef">
+  <title>Items API Workbench</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <script src="{{ url_for('static', filename='dashboard.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Items API Workbench home">
+      <span class="brand-mark" aria-hidden="true">API</span>
+      <span class="brand-name">FIELDNOTES <span>/ REST LAB</span></span>
+    </a>
+    <div class="connection" aria-live="polite">
+      <span class="connection-dot" data-connection-dot></span>
+      <span data-connection-label>Connecting</span>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">FLASK API / RESOURCE 01</p>
+        <h1 id="page-title">Items API Workbench</h1>
+        <p class="intro">A small control room for the four essential REST operations.</p>
+      </div>
+      <div class="request-readout" aria-live="polite">
+        <span class="readout-label">LATEST REQUEST</span>
+        <code data-last-request>Waiting for API</code>
+      </div>
+    </section>
+
+    <section class="facts" aria-label="API overview">
+      <div class="fact">
+        <span class="fact-label">RECORDS IN MEMORY</span>
+        <strong data-item-count>0</strong>
+      </div>
+      <div class="fact">
+        <span class="fact-label">COLLECTION ROUTE</span>
+        <strong><code>/items</code></strong>
+      </div>
+      <div class="fact">
+        <span class="fact-label">DATA FORMAT</span>
+        <strong>JSON <span class="fact-detail">over HTTP</span></strong>
+      </div>
+      <button class="refresh-button" type="button" data-refresh>Refresh list</button>
+    </section>
+
+    <section class="method-section" aria-labelledby="methods-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE REQUEST MAP</p>
+          <h2 id="methods-title">Four methods, one resource</h2>
+        </div>
+        <p class="section-note">Each action sends a real request to this Flask server.</p>
+      </div>
+      <div class="method-grid">
+        <article class="method-item">
+          <div class="method-top"><span class="method-tag get">GET</span><span class="method-status">200</span></div>
+          <code>/items</code>
+          <p>Read the collection or one item by ID.</p>
+        </article>
+        <article class="method-item">
+          <div class="method-top"><span class="method-tag post">POST</span><span class="method-status">201</span></div>
+          <code>/items</code>
+          <p>Create a new item from a JSON body.</p>
+        </article>
+        <article class="method-item">
+          <div class="method-top"><span class="method-tag put">PUT</span><span class="method-status">200</span></div>
+          <code>/items/&lt;id&gt;</code>
+          <p>Replace an item's name and description.</p>
+        </article>
+        <article class="method-item">
+          <div class="method-top"><span class="method-tag delete">DELETE</span><span class="method-status">204</span></div>
+          <code>/items/&lt;id&gt;</code>
+          <p>Remove an item. No response body is returned.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="list-panel">
+        <div class="section-heading list-heading">
+          <div>
+            <p class="eyebrow">LIVE RESOURCE</p>
+            <h2 id="workspace-title">Your items</h2>
+          </div>
+          <span class="list-count" data-list-count>0 items</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
+            </thead>
+            <tbody data-items-body>
+              <tr><td class="table-message" colspan="4">Loading items...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="notice" data-notice role="status" aria-live="polite" hidden></p>
+      </div>
+
+      <aside class="editor-panel" aria-labelledby="form-title">
+        <p class="eyebrow">POST / PUT</p>
+        <h2 id="form-title">Create an item</h2>
+        <p class="form-intro" data-form-intro>Send a JSON request to add a record to the collection.</p>
+        <form data-item-form>
+          <label for="item-name">Name <span class="required-mark">*</span></label>
+          <input id="item-name" name="name" type="text" maxlength="120" placeholder="e.g. Field notebook" required>
+
+          <label for="item-description">Description <span class="optional-mark">OPTIONAL</span></label>
+          <textarea id="item-description" name="description" rows="4" maxlength="500" placeholder="A short note about this item"></textarea>
+
+          <div class="form-actions">
+            <button class="primary-button" type="submit" data-submit-label>Create item <span aria-hidden="true">+</span></button>
+            <button class="text-button" type="button" data-cancel-edit hidden>Cancel</button>
+          </div>
+        </form>
+        <p class="form-footnote">Items live in memory and reset when the server restarts.</p>
+      </aside>
+    </section>
+    <footer class="page-footer"><span>LOCAL DEVELOPMENT SERVICE</span><span>Flask <i aria-hidden="true"></i> JSON <i aria-hidden="true"></i> REST</span></footer>
+  </main>
+</body>
+</html>
