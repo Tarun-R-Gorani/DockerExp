@@ -34,6 +34,20 @@ docker run --rm -p 5000:5000 items-api
 
 Open `http://127.0.0.1:5000/` to use the dashboard. Stop the container with `Ctrl+C`.
 
+## Publish with GitHub Actions
+
+The workflow at `.github/workflows/docker-publish.yml` builds and pushes an image when files under `lab3/` change on a pushed branch. It publishes a unique `sha-<commit>` tag for each push and publishes `latest` only for the repository's default branch. You can also start it manually from the repository's **Actions** tab.
+
+Before using the workflow:
+
+1. Create a Docker Hub repository named `items-api` under your Docker Hub account.
+2. Create a Docker Hub access token with permission to read and write repositories.
+3. In GitHub, open **Settings → Secrets and variables → Actions** and add these repository secrets:
+	- `DOCKERHUB_USERNAME`: your Docker Hub username.
+	- `DOCKERHUB_TOKEN`: the Docker Hub access token.
+
+The pushed image is named `<dockerhub-username>/items-api`. For example, run it with `docker run --rm -p 5000:5000 <dockerhub-username>/items-api:latest`.
+
 ## Endpoints
 
 | Method | Path | Behavior |
